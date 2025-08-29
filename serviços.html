@@ -427,6 +427,17 @@
             box-shadow: 0 15px 35px rgba(249, 168, 212, 0.4);
         }
 
+        .menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.menu.open {
+  max-height: 500px; /* ou 100vh se quiser garantir */
+}
+
+
         /* Footer específico */
         footer {
             background: rgba(255, 255, 255, 0.25);
@@ -529,16 +540,14 @@
         <div class="particle"></div>
     </div>
 
-    <!-- Header -->
-  <header class="fixed top-0 left-0 w-full glass-effect z-50 border-b border-pink-200/30">
+    <!-- Navbar Compacta -->
+<header class="fixed top-0 left-0 w-full glass-effect z-50 border-b border-pink-200/30">
   <nav class="flex items-center justify-between px-6 py-2 max-w-6xl mx-auto">
-    <!-- Logo compacta -->
     <div class="logo-container w-28 h-16 flex items-center justify-center rounded-xl border-2 border-pink-200/30 bg-gradient-to-br from-pink-100/20 via-yellow-100/20 to-pink-100/20">
       <img src="logo.png" alt="Logo Beleza Real" class="h-12 object-contain">
     </div>
 
-    <!-- Links do menu -->
-    <ul class="hidden md:flex space-x-8 font-medium">
+    <ul id="menu" class="max-h-0 overflow-hidden md:flex md:max-h-full space-x-8 font-medium transition-all duration-300">
       <li><a href="index.html" class="text-gray-600 hover:text-pink-400 transition-colors duration-300">Início</a></li>
       <li><a href="serviços.html" class="text-gray-600 hover:text-pink-400 transition-colors duration-300">Serviços</a></li>
       <li><a href="locais.html" class="text-gray-600 hover:text-pink-400 transition-colors duration-300">Locais</a></li>
@@ -546,14 +555,14 @@
       <li><a href="contato.html" class="text-gray-600 hover:text-pink-400 transition-colors duration-300">Contato</a></li>
     </ul>
 
-    <!-- Botão mobile -->
-    <button class="md:hidden p-2 rounded-lg hover:bg-pink-100/50 transition-colors">
+    <button id="menu-btn" class="md:hidden p-2 rounded-lg hover:bg-pink-100/50 transition-colors">
       <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
     </button>
   </nav>
 </header>
+
 
     <!-- Container principal -->
     <div class="main-container">
@@ -717,3 +726,14 @@
     </footer>
 </body>
 </html>
+
+<script>
+    const btn = document.getElementById('menu-btn');
+const menu = document.getElementById('menu');
+
+btn.addEventListener('click', () => {
+  menu.classList.toggle('open');
+});
+
+
+</script>
