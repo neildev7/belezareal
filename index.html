@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beleza Real - Mais que estética, é autoestima</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Paleta de cores refinada com mais variações pastéis */
+      --primary-pink: #f8bbd9;
+      --primary-pink-light: #fce7f3;
+      --primary-pink-dark: #f472b6;
+      --accent-yellow: #fef3c7;
+      --accent-yellow-light: #fffbeb;
+      --accent-yellow-dark: #fbbf24;
+      --accent-purple: #f3e8ff;
+      --accent-peach: #fed7aa;
+      --neutral-warm: #fefcf9;
+      --neutral-cool: #fdf2f8;
+      --glass-bg: rgba(255, 255, 255, 0.25);
+      --glass-border: rgba(248, 187, 217, 0.15);
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      /* Background mais sofisticado com múltiplas camadas */
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(248, 187, 217, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(254, 243, 199, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(243, 232, 255, 0.08) 0%, transparent 50%),
+        linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #f3e8ff 100%);
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Adicionando partículas flutuantes de fundo */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(248, 187, 217, 0.3), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(254, 243, 199, 0.3), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(243, 232, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(248, 187, 217, 0.2), transparent);
+      background-repeat: repeat;
+      background-size: 150px 100px;
+      animation: sparkle 20s linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+      50% { transform: translateY(-10px) rotate(180deg); opacity: 0.8; }
+    }
+    
+    .font-display {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Nova fonte script para elementos especiais */
+    .font-script {
+      font-family: 'Dancing Script', cursive;
+    }
+    
+    .hero-gradient {
+      /* Hero com efeito mais dramático e camadas */
+      background: 
+        linear-gradient(135deg, rgba(248, 187, 217, 0.12) 0%, transparent 50%),
+        linear-gradient(225deg, rgba(254, 243, 199, 0.12) 0%, transparent 50%),
+        linear-gradient(315deg, rgba(243, 232, 255, 0.08) 0%, transparent 50%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-gradient::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(248, 187, 217, 0.05), transparent, rgba(254, 243, 199, 0.05), transparent);
+      animation: rotate 30s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .glass-effect {
+      /* Efeito glass mais sofisticado */
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      box-shadow: 
+        0 8px 32px rgba(248, 187, 217, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Efeito hover mais elaborado com brilho */
+    .card-hover::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s;
+    }
+
+    .card-hover:hover::before {
+      left: 100%;
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 
+        0 25px 50px -12px rgba(248, 187, 217, 0.4),
+        0 0 0 1px rgba(248, 187, 217, 0.1);
+    }
+    
+    .btn-primary {
+      /* Botões com gradientes mais vibrantes e efeitos */
+      background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-pink-dark) 100%);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--primary-pink-dark) 0%, #ec4899 100%);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 
+        0 15px 35px rgba(248, 187, 217, 0.6),
+        0 5px 15px rgba(248, 187, 217, 0.4);
+    }
+    
+    .btn-secondary {
+      /* Botão secundário com efeitos similares */
+      background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-yellow-dark) 100%);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-secondary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s;
+    }
+
+    .btn-secondary:hover::before {
+      left: 100%;
+    }
+    
+    .btn-secondary:hover {
+      background: linear-gradient(135deg, var(--accent-yellow-dark) 0%, #f59e0b 100%);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 
+        0 15px 35px rgba(254, 243, 199, 0.7),
+        0 5px 15px rgba(254, 243, 199, 0.5);
+    }
+    
+    /* Animação float mais suave e natural */
+    .animate-float {
+      animation: float 8s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      25% { transform: translateY(-15px) rotate(1deg); }
+      50% { transform: translateY(-25px) rotate(0deg); }
+      75% { transform: translateY(-10px) rotate(-1deg); }
+    }
+
+    /* Animação de pulso para emojis */
+    .animate-pulse-slow {
+      animation: pulse-slow 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-slow {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+    
+    .logo-container {
+      /* Container da logo mais elegante */
+      width: 120px;
+      height: 80px;
+      background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(254, 243, 199, 0.6) 50%, rgba(252, 231, 243, 0.6) 100%);
+      border: 3px dashed rgba(248, 187, 217, 0.3);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 
+        0 8px 25px rgba(248, 187, 217, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .logo-container:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 12px 35px rgba(248, 187, 217, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+    
+    .logo-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(248, 187, 217, 0.3), transparent);
+      transition: left 0.6s;
+    }
+    
+    .logo-container:hover::before {
+      left: 100%;
+    }
+    
+    .logo-placeholder {
+      /* Placeholder mais elegante */
+      text-align: center;
+      color: #f472b6;
+      font-weight: 600;
+      z-index: 2;
+      position: relative;
+    }
+    
+    .section-divider {
+      height: 3px;
+      /* Divisor com gradiente mais complexo */
+      background: 
+        linear-gradient(90deg, 
+          transparent, 
+          rgba(248, 187, 217, 0.3), 
+          rgba(254, 243, 199, 0.4), 
+          rgba(243, 232, 255, 0.3), 
+          rgba(254, 243, 199, 0.4), 
+          rgba(248, 187, 217, 0.3), 
+          transparent);
+      margin: 5rem 0;
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .section-divider::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      filter: blur(1px);
+      opacity: 0.5;
+    }
+
+    /* Cards com gradientes mais sofisticados */
+    .pastel-card {
+      background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(254, 243, 199, 0.4) 50%, rgba(252, 231, 243, 0.3) 100%);
+      border: 1px solid rgba(248, 187, 217, 0.2);
+      backdrop-filter: blur(10px);
+      position: relative;
+    }
+
+    .pastel-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .pastel-icon-bg {
+      /* Background dos ícones mais vibrante */
+      background: 
+        linear-gradient(135deg, var(--accent-yellow-light) 0%, var(--primary-pink-light) 50%, var(--accent-purple) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pastel-icon-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+      border-radius: inherit;
+    }
+
+    /* Efeitos de texto mais elaborados */
+    .text-gradient-primary {
+      background: linear-gradient(135deg, #f472b6 0%, #ec4899 50%, #be185d 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .text-gradient-secondary {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Animações de entrada mais suaves */
+    .fade-in-up {
+      animation: fadeInUp 1s ease-out forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .fade-in-up.delay-1 { animation-delay: 0.2s; }
+    .fade-in-up.delay-2 { animation-delay: 0.4s; }
+    .fade-in-up.delay-3 { animation-delay: 0.6s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsividade melhorada */
+    @media (max-width: 768px) {
+      .logo-container {
+        width: 180px;
+        height: 60px;
+      }
+      
+      .hero-gradient::before {
+        animation-duration: 20s;
+      }
+    }
+  </style>
+</head>
+<body class="text-gray-700 relative">
+
+<!-- Navbar Compacta -->
+<header class="fixed top-0 left-0 w-full glass-effect z-50 border-b border-pink-200/30">
+  <nav class="flex items-center justify-between px-6 py-2 max-w-6xl mx-auto">
+    <!-- Logo compacta -->
+    <div class="logo-container w-28 h-16 flex items-center justify-center rounded-xl border-2 border-pink-200/30 bg-gradient-to-br from-pink-100/20 via-yellow-100/20 to-pink-100/20">
+      <img src="logo.png" alt="Logo Beleza Real" class="h-12 object-contain">
+    </div>
+
+    <!-- Links do menu -->
+    <ul class="hidden md:flex space-x-8 font-medium">
+      <li><a href="index.html" class="text-gray-600 hover:text-pink-400 transition-colors duration-300">Início</a></li>
+      <li><a href="serviços.html" class="text-gray-600 hover:text-pink-400 transition-colors duration-300">Serviços</a></li>
+      <li><a href="locais.html" class="text-gray-600 hover:text-pink-400 transition-colors duration-300">Locais</a></li>
+      <li><a href="sobre.html" class="text-gray-600 hover:text-pink-400 transition-colors duration-300">Sobre</a></li>
+      <li><a href="contato.html" class="text-gray-600 hover:text-pink-400 transition-colors duration-300">Contato</a></li>
+    </ul>
+
+    <!-- Botão mobile -->
+    <button class="md:hidden p-2 rounded-lg hover:bg-pink-100/50 transition-colors">
+      <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </nav>
+</header>
+
+
+
+  <!-- Hero Section -->
+  <section class="hero-gradient pt-36 pb-28 px-6 relative z-10">
+    <div class="container mx-auto text-center max-w-5xl">
+      <!-- Emojis com animações mais elaboradas -->
+      <div class="animate-float mb-10 fade-in-up">
+        <div class="flex justify-center space-x-6 mb-8">
+          <span class="inline-block text-7xl animate-pulse-slow">🌸</span>
+          <span class="inline-block text-7xl animate-pulse-slow" style="animation-delay: 1s;">✨</span>
+          <span class="inline-block text-7xl animate-pulse-slow" style="animation-delay: 2s;">🦋</span>
+        </div>
+      </div>
+      
+      <!-- Título com gradientes mais sofisticados -->
+      <div class="fade-in-up delay-1">
+        <h1 class="font-display text-7xl md:text-8xl font-bold mb-8 leading-tight">
+          <span class="text-gradient-primary">
+            Mais que estética,
+          </span>
+          <br>
+          <span class="text-6xl md:text-7xl text-gradient-secondary font-script">
+            é autoestima
+          </span>
+        </h1>
+      </div>
+      
+      <!-- Texto com melhor tipografia -->
+      <div class="fade-in-up delay-2">
+        <p class="text-2xl md:text-3xl text-gray-600 max-w-4xl mx-auto mb-14 leading-relaxed font-light">
+          Bem-vinda à <span class="font-bold text-gradient-primary">Beleza Real</span> — um espaço feito para você se cuidar, 
+          se amar e se sentir <span class="font-bold text-gradient-secondary">confiante</span> todos os dias.
+        </p>
+      </div>
+      
+      <!-- Botões com melhor espaçamento e efeitos -->
+      <div class="flex flex-col sm:flex-row gap-6 justify-center items-center fade-in-up delay-3">
+        <a href="serviços.html" class="btn-primary px-10 py-5 text-white font-bold rounded-full shadow-xl inline-flex items-center gap-3 text-lg">
+          <span>Conheça nossas dicas</span>
+          <span class="text-2xl animate-pulse-slow">💖</span>
+        </a>
+        <a href="sobre.html" class="px-10 py-5 text-gray-600 font-semibold rounded-full border-3 border-pink-200 hover:border-pink-300 hover:text-pink-400 hover:bg-pink-50/50 transition-all duration-300 text-lg backdrop-blur-sm">
+          Saiba mais sobre nós
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Destaques Section -->
+  <section class="py-24 px-6 relative z-10">
+    <div class="container mx-auto">
+      <!-- Header da seção mais impactante -->
+      <div class="text-center mb-20">
+        <h2 class="font-display text-6xl md:text-7xl font-bold text-gray-700 mb-6">
+          Nossos <span class="text-gradient-primary">Destaques</span>
+        </h2>
+        <p class="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-light">
+          Descubra nossa seleção especial de dicas de produtos e serviços pensados especialmente para você
+        </p>
+      </div>
+  
+        
+        <<!-- Grid com melhor espaçamento -->
+<div class="grid md:grid-cols-3 gap-10 max-w-7xl mx-auto">
+  <!-- Card Skincare -->
+  <div class="card-hover pastel-card rounded-3xl p-10 text-center shadow-2xl">
+    <div class="w-24 h-24 mx-auto mb-8 pastel-icon-bg rounded-3xl flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110">
+      <span class="text-5xl">🌸</span>
+    </div>
+    <h3 class="font-display text-3xl font-bold mb-6 text-gray-700">Skincare</h3>
+    <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+      Kits completos para deixar sua pele iluminada, saudável e radiante todos os dias.
+    </p>
+    <a href="serviços.html" class="inline-flex items-center text-pink-400 font-bold hover:text-pink-500 transition-all duration-300 group text-lg">
+      <span>Explorar serviços</span>
+      <svg class="w-5 h-5 ml-3 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Card Cabelo -->
+  <div class="card-hover pastel-card rounded-3xl p-10 text-center shadow-2xl">
+    <div class="w-24 h-24 mx-auto mb-8 pastel-icon-bg rounded-3xl flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110">
+      <span class="text-5xl">💇‍♀️</span>
+    </div>
+    <h3 class="font-display text-3xl font-bold mb-6 text-gray-700">Cabelo</h3>
+    <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+      Tratamentos profissionais que fortalecem e realçam a beleza natural dos seus fios.
+    </p>
+    <a href="serviços.html" class="inline-flex items-center text-pink-400 font-bold hover:text-pink-500 transition-all duration-300 group text-lg">
+      <span>Ver tratamentos</span>
+      <svg class="w-5 h-5 ml-3 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Card Unhas -->
+  <div class="card-hover pastel-card rounded-3xl p-10 text-center shadow-2xl">
+    <div class="w-24 h-24 mx-auto mb-8 pastel-icon-bg rounded-3xl flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110">
+      <span class="text-5xl">💅</span>
+    </div>
+    <h3 class="font-display text-3xl font-bold mb-6 text-gray-700">Unhas</h3>
+    <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+      Autocuidado até nos detalhes: mãos e unhas sempre impecáveis e bem cuidadas.
+    </p>
+    <a href="contato.html" class="inline-flex items-center text-pink-400 font-bold hover:text-pink-500 transition-all duration-300 group text-lg">
+      <span>Agendar serviço</span>
+      <svg class="w-5 h-5 ml-3 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </a>
+  </div>
+</div>
+
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Call to Action Section -->
+  <section class="py-28 px-6 relative z-10">
+    <div class="container mx-auto">
+      <!-- CTA com design mais impactante -->
+      <div class="glass-effect rounded-3xl p-16 text-center max-w-5xl mx-auto border border-pink-200/30 shadow-2xl">
+        <div class="animate-float mb-10">
+          <div class="flex justify-center space-x-4">
+            <span class="text-6xl animate-pulse-slow">🌟</span>
+            <span class="text-6xl animate-pulse-slow" style="animation-delay: 1s;">💖</span>
+            <span class="text-6xl animate-pulse-slow" style="animation-delay: 2s;">✨</span>
+          </div>
+        </div>
+        
+        <h2 class="font-display text-5xl md:text-7xl font-bold text-gray-700 mb-8 leading-tight">
+          Descubra um novo jeito de <span class="text-gradient-primary">se cuidar</span>
+        </h2>
+        
+        <p class="text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed font-light">
+          Conheça os melhores locais em <span class="font-bold text-gradient-primary">Lorena-SP</span> e nossos serviços exclusivos
+          desenvolvidos especialmente para você.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <a href="locais.html" class="btn-secondary px-10 py-5 text-gray-700 font-bold rounded-full shadow-xl inline-flex items-center gap-3 text-lg">
+            <span>Ver Locais</span>
+            <span class="text-2xl animate-pulse-slow">📍</span>
+          </a>
+          <a href="serviços.html" class="px-10 py-5 text-gray-600 font-semibold rounded-full border-3 border-yellow-200 hover:border-yellow-300 hover:text-yellow-500 hover:bg-yellow-50/50 transition-all duration-300 text-lg backdrop-blur-sm">
+            Explorar Serviços
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <!-- Footer com gradiente mais sofisticado -->
+  <footer class="bg-gradient-to-br from-pink-400 via-rose-400 to-amber-400 text-white py-20 mt-24 relative overflow-hidden">
+    <!-- Elementos decorativos no footer -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-10 left-10 w-32 h-32 bg-white rounded-full blur-xl"></div>
+      <div class="absolute bottom-10 right-10 w-40 h-40 bg-white rounded-full blur-xl"></div>
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-white rounded-full blur-lg"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center">
+        <div class="mb-10">
+          <div class="flex justify-center space-x-4">
+            <span class="text-5xl animate-bounce">🌸</span>
+            <span class="text-5xl animate-bounce" style="animation-delay: 0.2s;">✨</span>
+            <span class="text-5xl animate-bounce" style="animation-delay: 0.4s;">🦋</span>
+          </div>
+        </div>
+        
+        <h3 class="font-display text-4xl font-bold mb-4">Beleza Real</h3>
+        <p class="text-pink-100 text-2xl mb-10 font-light font-script">Mais que estética, é autoestima</p>
+        
+        <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-12 text-xl">
+          <a href="mailto:belezar.real@gmail.com" class="text-pink-100 hover:text-white transition-all duration-300 font-semibold hover:scale-105">
+            belezar.real@gmail.com
+          </a>
+          <span class="hidden md:block text-pink-200 text-2xl">•</span>
+          <a href="tel:+5512981548625" class="text-pink-100 hover:text-white transition-all duration-300 font-semibold hover:scale-105">
+            (12) 98154-8625
+          </a>
+          <span class="hidden md:block text-pink-200 text-2xl">•</span>
+          <span class="text-pink-100 font-semibold">Lorena-SP</span>
+        </div>
+        
+        <div class="border-t border-pink-300/30 pt-8">
+          <p class="text-pink-100 font-light text-lg">
+            © 2025 Beleza Real. Feito pelo Namorado da Maria em Lorena-SP
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

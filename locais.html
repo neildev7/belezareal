@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Locais - Beleza Real</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-20px) rotate(120deg); }
+      66% { transform: translateY(-10px) rotate(240deg); }
+    }
+    
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes pulse-soft {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .floating-particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: linear-gradient(45deg, #fef3c7, #fce7f3);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.7;
+    }
+
+    header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(248, 187, 217, 0.15);
+}
+
+.mapa-img {
+  display: block;
+  width: 100%;            /* ocupa 100% da largura do container */
+  max-width: 1200px;      /* largura máxima para telas grandes */
+  height: auto;           /* mantém proporção */
+  border-radius: 16px;    /* cantos arredondados */
+  box-shadow: 0 12px 35px rgba(0,0,0,0.2); /* sombra mais elegante */
+  margin: 2rem auto;      /* centraliza horizontalmente e dá espaçamento vertical */
+  object-fit: cover;      /* preenche o container sem distorcer a imagem */
+}
+
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem 2rem;
+}
+
+.logo-container {
+  width: 120px;
+  height: 80px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(254, 243, 199, 0.6) 50%, rgba(252, 231, 243, 0.6) 100%);
+  border: 3px dashed rgba(248, 187, 217, 0.3);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(248, 187, 217, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.logo-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(248, 187, 217, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.logo-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(248, 187, 217, 0.3), transparent);
+  transition: left 0.6s;
+}
+
+.logo-container:hover::before {
+  left: 100%;
+}
+
+.logo-placeholder {
+  text-align: center;
+  color: #f472b6;
+  font-weight: 600;
+  z-index: 2;
+  position: relative;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #6b7280; /* cinza escuro */
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-links a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #fce7f3 0%, #fde047 100%);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.nav-links a:hover::before {
+  left: 0;
+}
+
+.nav-links a:hover {
+  color: white;
+  transform: translateY(-2px);
+}
+
+button.mobile-menu {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button.mobile-menu svg {
+  width: 24px;
+  height: 24px;
+  color: #6b7280;
+}
+    
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #fbbf24;
+      border-radius: 50%;
+      animation: sparkle 2s ease-in-out infinite;
+    }
+    
+    .fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+    
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .glass-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .glass-card:hover {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2));
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #f59e0b, #ec4899, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .btn-gradient {
+      background: linear-gradient(135deg, #fbbf24, #f472b6);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-gradient:hover {
+      background: linear-gradient(135deg, #f59e0b, #ec4899);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(251, 191, 36, 0.4);
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #e0e7ff 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    .font-display { font-family: 'Playfair Display', serif; }
+    .font-script { font-family: 'Dancing Script', cursive; }
+  </style>
+</head>
+<body class="relative">
+  <!-- Floating Particles Background -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden">
+    <div class="floating-particle" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+    <div class="floating-particle" style="top: 20%; left: 80%; animation-delay: 1s;"></div>
+    <div class="floating-particle" style="top: 60%; left: 20%; animation-delay: 2s;"></div>
+    <div class="floating-particle" style="top: 80%; left: 70%; animation-delay: 3s;"></div>
+    <div class="floating-particle" style="top: 40%; left: 90%; animation-delay: 4s;"></div>
+    <div class="floating-particle" style="top: 70%; left: 5%; animation-delay: 5s;"></div>
+    
+    <div class="sparkle" style="top: 15%; left: 60%; animation-delay: 0.5s;"></div>
+    <div class="sparkle" style="top: 45%; left: 15%; animation-delay: 1.5s;"></div>
+    <div class="sparkle" style="top: 75%; left: 85%; animation-delay: 2.5s;"></div>
+    <div class="sparkle" style="top: 25%; left: 40%; animation-delay: 3.5s;"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 w-full glass-effect z-50 border-b border-pink-200/30">
+  <nav class="flex items-center justify-between px-6 py-2 max-w-6xl mx-auto">
+    <!-- Logo compacta -->
+    <div class="logo-container w-28 h-16 flex items-center justify-center rounded-xl border-2 border-pink-200/30 bg-gradient-to-br from-pink-100/20 via-yellow-100/20 to-pink-100/20">
+      <img src="logo.png" alt="Logo Beleza Real" class="h-12 object-contain">
+    </div>
+
+    <!-- Links do menu -->
+    <ul class="hidden md:flex space-x-8 font-medium">
+      <li><a href="index.html" class="text-gray-600 hover:text-pink-400 transition-colors duration-300">Início</a></li>
+      <li><a href="serviços.html" class="text-gray-600 hover:text-pink-400 transition-colors duration-300">Serviços</a></li>
+      <li><a href="locais.html" class="text-gray-600 hover:text-pink-400 transition-colors duration-300">Locais</a></li>
+      <li><a href="sobre.html" class="text-gray-600 hover:text-pink-400 transition-colors duration-300">Sobre</a></li>
+      <li><a href="contato.html" class="text-gray-600 hover:text-pink-400 transition-colors duration-300">Contato</a></li>
+    </ul>
+
+    <!-- Botão mobile -->
+    <button class="md:hidden p-2 rounded-lg hover:bg-pink-100/50 transition-colors">
+      <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </nav>
+</header>
+
+  <!-- Main Content -->
+  <main class="pt-32 pb-20">
+    <div class="container mx-auto px-6">
+      <!-- Hero Section -->
+      <div class="text-center mb-16 fade-in-up">
+        <h1 class="font-display text-5xl md:text-7xl font-bold gradient-text mb-6">
+          Nossos Locais
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Descubra os melhores espaços de beleza e bem-estar em <span class="font-script text-2xl md:text-3xl text-pink-500">Lorena - SP</span>
+        </p>
+      </div>
+
+      <!-- Locations Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <!-- Location 1 -->
+        <div class="glass-card rounded-3xl p-8 fade-in-up" style="animation-delay: 0.1s;">
+          <div class="mb-6">
+            <div class="w-16 h-16 bg-gradient-to-br from-yellow-200 to-pink-200 rounded-2xl flex items-center justify-center mb-4">
+              <span class="text-2xl">🌸</span>
+            </div>
+            <h3 class="font-display text-2xl font-semibold text-gray-800 mb-3">
+              Spa Bem Me Quero
+            </h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              O Espaço Bem Me Quero em Lorena é um SPA urbano focado em bem-estar, oferecendo massagens, estética, terapias e um ambiente acolhedor.
+            </p>
+            <div class="flex items-center text-sm text-gray-500 mb-4">
+              <span class="mr-2">📍</span>
+              <span>Praça Baronesa de Santa Eulália,56, Centro, Lorena, Sao Paulo</span>
+            </div>
+          </div>
+          <button class="btn-gradient text-white px-6 py-3 rounded-full font-medium w-full">
+            Ver Detalhes
+          </button>
+        </div>
+
+        <!-- Location 2 -->
+        <div class="glass-card rounded-3xl p-8 fade-in-up" style="animation-delay: 0.2s;">
+          <div class="mb-6">
+            <div class="w-16 h-16 bg-gradient-to-br from-pink-200 to-purple-200 rounded-2xl flex items-center justify-center mb-4">
+              <span class="text-2xl">✨</span>
+            </div>
+            <h3 class="font-display text-2xl font-semibold text-gray-800 mb-3">
+              São Camilo
+            </h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              O São Camilo em Lorena é um laboratório e clínica que oferece exames e serviços de saúde, com foco em qualidade e atendimento confiável.
+            </p>
+            <div class="flex items-center text-sm text-gray-500 mb-4">
+              <span class="mr-2">📍</span>
+              <span>R. Dom Bôsco, 529 - Centro, Lorena - SP</span>
+            </div>
+          </div>
+          <button class="btn-gradient text-white px-6 py-3 rounded-full font-medium w-full">
+            Ver Detalhes
+          </button>
+        </div>
+
+        <!-- Location 3 -->
+        <div class="glass-card rounded-3xl p-8 fade-in-up" style="animation-delay: 0.3s;">
+          <div class="mb-6">
+            <div class="w-16 h-16 bg-gradient-to-br from-yellow-200 to-orange-200 rounded-2xl flex items-center justify-center mb-4">
+              <span class="text-2xl">🦋</span>
+            </div>
+            <h3 class="font-display text-2xl font-semibold text-gray-800 mb-3">
+              Raquel Carvalho Creative Studio Lorena
+            </h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              O Raquel Carvalho Creative Studio em Lorena é um salão especializado em cabelos, principalmente loiros e tratamentos capilares, oferecendo atendimento personalizado em um ambiente profissional.
+
+            </p>
+            <div class="flex items-center text-sm text-gray-500 mb-4">
+              <span class="mr-2">📍</span>
+              <span>Praça Baronesa Santa Eulália, de - Centro, Lorena - SP</span>
+            </div>
+          </div>
+          <button class="btn-gradient text-white px-6 py-3 rounded-full font-medium w-full">
+            Ver Detalhes
+          </button>
+        </div>
+
+        <!-- Location 4 -->
+        <div class="glass-card rounded-3xl p-8 fade-in-up" style="animation-delay: 0.4s;">
+          <div class="mb-6">
+            <div class="w-16 h-16 bg-gradient-to-br from-green-200 to-teal-200 rounded-2xl flex items-center justify-center mb-4">
+              <span class="text-2xl">🌿</span>
+            </div>
+            <h3 class="font-display text-2xl font-semibold text-gray-800 mb-3">
+              Perfumaria Sumirê Lorena-SP
+            </h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+                A Perfumaria Sumirê em Lorena é uma loja especializada em perfumes, cosméticos e produtos de beleza, oferecendo variedade de marcas nacionais e internacionais com atendimento voltado ao cliente local.
+            </p>
+            <div class="flex items-center text-sm text-gray-500 mb-4">
+              <span class="mr-2">📍</span>
+              <span>Rua Dr. Rodrigues de Azevedo, 288 - Centro, Lorena - SP,</span>
+            </div>
+          </div>
+          <button class="btn-gradient text-white px-6 py-3 rounded-full font-medium w-full">
+            Ver Detalhes
+          </button>
+        </div>
+
+        <!-- Location 5 -->
+        <div class="glass-card rounded-3xl p-8 fade-in-up" style="animation-delay: 0.5s;">
+          <div class="mb-6">
+            <div class="w-16 h-16 bg-gradient-to-br from-purple-200 to-pink-200 rounded-2xl flex items-center justify-center mb-4">
+              <span class="text-2xl">💜</span>
+            </div>
+            <h3 class="font-display text-2xl font-semibold text-gray-800 mb-3">
+              Clinica Onlife Pilates Fisioterapia e Fitness
+            </h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Especializada em pilates, fisioterapia e fitness, oferecendo um espaço acolhedor e profissionais qualificados para atender suas necessidades de saúde e bem-estar.
+            </p>
+            <div class="flex items-center text-sm text-gray-500 mb-4">
+              <span class="mr-2">📍</span>
+              <span>R. Aziz Eluani, 141 - Vila Geny, Lorena - SP</span>
+            </div>
+          </div>
+          <button class="btn-gradient text-white px-6 py-3 rounded-full font-medium w-full">
+            Ver Detalhes
+          </button>
+        </div>
+
+        <!-- Call to Action Card -->
+        <div class="glass-card rounded-3xl p-8 fade-in-up bg-gradient-to-br from-pink-100/50 to-yellow-100/50" style="animation-delay: 0.6s;">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-gradient-to-br from-pink-300 to-yellow-300 rounded-2xl flex items-center justify-center mb-4 mx-auto">
+              <span class="text-2xl">💫</span>
+            </div>
+            <h3 class="font-display text-2xl font-semibold text-gray-800 mb-3">
+              Seu Local Aqui
+            </h3>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Quer fazer parte da nossa rede de parceiros? Entre em contato e descubra como podemos trabalhar juntos.
+            </p>
+            <button class="btn-gradient text-white px-8 py-4 rounded-full font-medium">
+              Seja Parceiro
+            </button>
+          </div>
+        </div>
+      </div>
+          <!-- Map Section -->
+<div class="mt-20 fade-in-up" style="animation-delay: 0.7s;">
+  <div class="text-center mb-12">
+    <h2 class="font-display text-4xl md:text-5xl font-bold gradient-text mb-4">
+      Encontre-nos em Lorena
+    </h2>
+    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+      Todos os nossos parceiros estão estrategicamente localizados para sua comodidade
+    </p>
+  </div>
+    <div class="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-xl bg-white/25 backdrop-blur-lg border border-white/20 p-1">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.123456789!2d-45.1256789!3d-22.7456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8e123456789ab%3A0xabcdef1234567890!2sLorena%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1234567890123"
+    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" class="rounded-3xl"></iframe>
+</div>
+
+</div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="glass-effect py-12 mt-20">
+    <div class="container mx-auto px-6 text-center">
+      <div class="mb-8">
+        <h3 class="font-script text-3xl md:text-4xl gradient-text mb-4">
+          "Mais que estética, é autoestima."
+        </h3>
+        <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          Conectando você aos melhores profissionais e espaços de beleza em Lorena, 
+          porque você merece se sentir especial todos os dias.
+        </p>
+      </div>
+      
+      <div class="flex flex-wrap justify-center gap-6 mb-8">
+        <a href="index.html" class="text-gray-600 hover:text-pink-500 transition-colors duration-300">Home</a>
+        <a href="serviços.html" class="text-gray-600 hover:text-pink-500 transition-colors duration-300">Serviços</a>
+        <a href="locais.html" class="text-pink-500 font-semibold">Locais</a>
+        <a href="sobre.html" class="text-gray-600 hover:text-pink-500 transition-colors duration-300">Sobre</a>
+        <a href="contato.html" class="text-gray-600 hover:text-pink-500 transition-colors duration-300">Contato</a>
+      </div>
+      
+      <div class="border-t border-white/20 pt-8">
+        <p class="text-gray-500 text-sm">
+          © 2025 Beleza Real. Todos os direitos reservados. Feito pelo Namorado da Maria em Lorena - SP
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Add stagger animation to cards
+    const cards = document.querySelectorAll('.fade-in-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    });
+
+    cards.forEach(card => {
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>
+
